@@ -46,11 +46,11 @@ fs = FS(dev)
 fs.tgz("/var/tmp/rsi.txt","/var/tmp/rsi.txt.tgz")
 fs.tgz("/var/log/", "/var/tmp/master_re_var_log.tgz")
 
+# Need to use starshell to archieve file copy and compress in backup RE
 from jnpr.junos.utils.start_shell import StartShell 
 ss = StartShell(dev)
 ss.open()
-#ss.run('cli','>')
-#ss.run('request routing-engine login backup')
+
 
 ss.run('cli -c "request routing-engine login backup"')
 ss.run("file archive compress source /var/log destination /var/tmp/backup_re_var_log",">")
@@ -59,7 +59,7 @@ ss.run("file copy /var/tmp/backup_re_var_log.tgz re1:/var/tmp",">")
 ss.run("exit",">")
 fl = ss.run('ls -l /var/tmp/*.tgz')
 md5 = ss.run('md5 /var/tmp/*.tgz')
-print fl
-print md5
+print fl #list out all tgz files under /var/tmp
+print md5 #list out all tgz files with md5 under /var/tmp
 ss.close()
 dev.close()
