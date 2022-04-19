@@ -15,6 +15,8 @@ b2: Copy this script to RE0 and RE1 at /var/db/script/op directory respectively.
 b3: This python on-box script need to be modified before use:
 a1. replace router's IP, username and password in this line with correct one e.g dev = Device(host='172.16.99.37',user='huasu',password='juniper123')
 
+b4: execute op script on Junos device: op info_collect.py
+
 C: Other requirements:
 
 a. User in part a1 should have startshell privilidge, otherwise /var/log file on backup RE would not be able to generate. 
